@@ -8,7 +8,7 @@ Vue.component('app-list', List);
 
 Vue.mixin({
     beforeCreate() {
-      console.log('beforeCreate')
+      //console.log('beforeCreate')
     }
 });
 
