@@ -1,16 +1,8 @@
 import Vue from 'vue'
+import Vuelidate from 'vuelidate'
 import App from './App.vue'
-import List from './List'
 
-Vue.filter('uppercase', (value) => value.toUpperCase() );
-
-Vue.component('app-list', List);
-
-Vue.mixin({
-    beforeCreate() {
-      //console.log('beforeCreate')
-    }
-});
+Vue.use(Vuelidate);
 
 new Vue({
   el: '#app',
