@@ -1,22 +1,28 @@
 export default {
     bind(el, bindings, vnode) {
-        console.log('bind');
-        el.style.color = 'green'
-    },
-    inserted(el, bindings, vnode) {
-        console.log('inserted');
+        //el.style.color = 'green'
 
-    },
-    update(el, bindings, vnode, olvVnode){
-        console.log('update');
 
-    },
-    componentUpdated(el, bindings, vnode, olvVnode) {
-        console.log('componentUpdated');
 
-    },
-    unbind(){
-        console.log('unbind');
+        const fontMod = bindings.modifiers['font'];
+
+        if (fontMod){
+            el.style.fontSize = '50px'
+        }
+
+        const delayMod = bindings.modifiers['delay'];
+
+        let delay = 0;
+        if(delayMod){
+            delay = 1000
+        }
+        setTimeout(()=>{
+
+            const arg = bindings.arg;
+            el.style[arg] = bindings.value;
+
+        }, delay);
+
     }
 
 }

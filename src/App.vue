@@ -1,9 +1,8 @@
 <template>
     <div>
 
-        <h2 v-colored v-if="visible">{{ title }}</h2>
-        <button @click="visible = !visible">Toggle</button>
-        <button @click="title = 'New title'">Change title</button>
+        <h2 v-colored:background.font="'green'">{{ title }}</h2>
+        <h2 v-colored:color.delay.font="'blue'">{{ title }}</h2>
 
     </div>
 
@@ -15,7 +14,6 @@
         data() {
             return {
                 title: 'Hello I am Vue',
-                visible: true
             }
         }
     }
