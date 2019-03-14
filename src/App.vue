@@ -2,54 +2,19 @@
     <div>
 
         <h2>Form input</h2>
-            <input type="text" v-model.lazy="name">
-            <p>{{ name }}</p>
+        <!--<input type="text" v-model.number="age">-->
+        <!--<p>{{ age }}</p>-->
 
-        <hr>
-
-            <textarea v-model="textarea">{{ textarea }}</textarea>
-            <p>{{ textarea }}</p>
-
-        <hr>
-
-            <label>
-                <input type="checkbox" value="instagram" v-model="social"> Instagram
-            </label>
-            <label>
-                <input type="checkbox" value="vk" v-model="social"> VK
-            </label>
-            <label>
-                <input type="checkbox" value="facebook" v-model="social"> Facebook
-            </label>
-
-            <ul>
-                <li v-for="s in social">{{ s }}</li>
-            </ul>
-
-        <hr>
+        <!--<hr>-->
 
 
-            <label>
-                <input type="radio" value="instagram" v-model="socialRadio"> Instagram
-            </label>
-            <label>
-                <input type="radio" value="vk" v-model="socialRadio"> VK
-            </label>
-            <label>
-                <input type="radio" value="facebook" v-model="socialRadio"> Facebook
-            </label>
-
-            <p>{{ socialRadio }}</p>
+        <app-onoff v-model="switched"></app-onoff>
 
 
-        <hr>
-
-
-        <select v-model="social1">
-            <option v-for="soc in socList">{{soc}}</option>
-        </select>
-        <p>{{ social1 }}</p>
-
+        <div>
+            <h3 v-if="switched">Component is enabled</h3>
+            <h3 v-else>Component is disabled</h3>
+        </div>
 
 
     </div>
@@ -58,20 +23,23 @@
 
 <script>
 
+    import Onoff from './Onoff'
+
     export default {
         data() {
             return {
-                name: '',
-                textarea: 'I am initial commit',
-
-                social: ['vk'],
-
-                socialRadio: 'facebook',
-
-                defaultSocial: 'vk',
-                social1: 'instagram',
-                socList: ['vk', 'instagram', 'facebook']
+                age: 20,
+                switched: true
             }
+        },
+        watch: {
+            age(value) {
+                console.log(value);
+                console.log(typeof value)
+            }
+        },
+        components: {
+            appOnoff: Onoff
         }
 
     }
