@@ -1,116 +1,48 @@
 <template>
+
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <form class="pt-5" @submit.prevent="onSubmit">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <!--<li class="nav-item active">-->
+                        <!--<router-link class="nav-link" to="/">Home</router-link>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<router-link class="nav-link" :to="'/cars'">Cars</router-link>-->
+                    <!--</li>-->
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                        type="email"
-                        id="email"
-                        class="form-control"
-                        :class="{'is-invalid': $v.email.$error}"
-                        @blur="$v.email.$touch()"
-                        v-model="email"
-                >
-                <div class="invalid-feedback" v-if="!$v.email.required">
-                    Email field is required
-                </div>
-                <div class="invalid-feedback" v-if="!$v.email.email">
-                    This field should be an email
-                </div>
-                <div class="invalid-feedback" v-if="!$v.email.uniqEmail">
-                    This email is used
-                </div>
+                    <router-link tag="li" class="nav-item" exact to="/" active-class="active">
+                        <a class="nav-link">Home</a>
+                    </router-link>
+
+                    <router-link tag="li" class="nav-item" to="/cars" active-class="active">
+                        <a class="nav-link">Cars</a>
+                    </router-link>
+
+                    <router-link tag="li" class="nav-item" to="/car/3" active-class="active">
+                        <a class="nav-link">Car 3</a>
+                    </router-link>
+                    <router-link tag="li" class="nav-item" to="/car/5" active-class="active">
+                        <a class="nav-link">Car 5</a>
+                    </router-link>
+
+                </ul>
             </div>
+        </nav>
 
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                        type="password"
-                        id="password"
-                        class="form-control"
-                        :class="{'is-invalid': $v.password.$error}"
-                        @blur="$v.password.$touch()"
-                        v-model="password"
-                >
-                <div class="invalid-feedback" v-if="!$v.email.minLength">
-                    Min length of password is {{ $v.password.$params.minLength.min }}. Now it is {{ password.length }}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="confirm">Confirm password</label>
-                <input
-                        type="password"
-                        id="confirm"
-                        class="form-control"
-                        :class="{'is-invalid': $v.confirmPassword.$error}"
-                        @blur="$v.confirmPassword.$touch()"
-                        v-model="confirmPassword"
-                >
-                <div class="invalid-feedback" v-if="!$v.confirmPassword.sameAs">
-                    Passwords should match
-                </div>
-            </div>
-
-
-            <button
-                    class="btn btn-success"
-                    type="submit"
-                    :disabled="$v.$invalid"
-            >Submit</button>
-
-        </form>
-
+        <router-view></router-view>
     </div>
+
 </template>
 
 <script>
-
-    import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
-
     export default {
         data() {
             return {
-                email: '',
-                password: '',
-                confirmPassword: '',
 
-            }
-        },
-        methods: {
-            onSubmit() {
-                console.log('Email: ', this.email);
-                console.log('Password: ', this.password)
-            }
-        },
-        validations: {
-            email: {
-                required,
-                email,
-                uniqEmail: function (newEmail) {
-                    if( newEmail === '' ) return true;
-
-                    return new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            const value = newEmail !== 'test@mail.ru';
-                            resolve(value)
-                        }, 1000)
-                    })
-                }
-            },
-            password: {
-                minLength: minLength(6)
-            },
-            confirmPassword: {
-                sameAs: sameAs((vue) => {
-                    return vue.password
-                })
             }
         }
-
     }
 </script>
 
