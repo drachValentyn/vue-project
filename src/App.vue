@@ -18,6 +18,9 @@
                 <div class="invalid-feedback" v-if="!$v.email.email">
                     This field should be an email
                 </div>
+                <div class="invalid-feedback" v-if="!$v.email.uniqEmail">
+                    This email is used
+                </div>
             </div>
 
 
@@ -47,7 +50,7 @@
                         v-model="confirmPassword"
                 >
                 <div class="invalid-feedback" v-if="!$v.confirmPassword.sameAs">
-                    Password should match
+                    Passwords should match
                 </div>
             </div>
 
@@ -72,7 +75,17 @@
         validations: {
             email: {
                 required,
-                email
+                email,
+                uniqEmail: function (newEmail) {
+                    if( newEmail === '' ) return true;
+
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            const value = newEmail !== 'test@mail.ru';
+                            resolve(value)
+                        }, 3000)
+                    })
+                }
             },
             password: {
                 minLength: minLength(6)
