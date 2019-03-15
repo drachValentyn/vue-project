@@ -6,17 +6,10 @@
 
         <br>
 
-        <!--<router-link-->
-                <!--class="btn btn-info"-->
-                <!--tag="button"-->
-                <!--:to="'/car/'+ id +'/full'"-->
-
-        <!--&gt;Full info</router-link>-->
-
         <router-link
                 class="btn btn-info"
                 tag="button"
-                :to="{name: 'carFull', params: {id: id}}"
+                :to="{name: 'carFull', params: {id: id}, query: {name: 'Mazda', year: 2020}, hash: '#scroll'}"
 
         >Full info</router-link>
 
