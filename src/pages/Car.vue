@@ -36,6 +36,15 @@
             goBackToCars() {
                 this.$router.push('/cars')
             }
+        },
+        beforeRouteLeave(to, fromR, next) {
+            console.log('beforeRouteLeave');
+
+            if (window.confirm('Are you sure to leave?')) {
+                next()
+            } else {
+                next(false)
+            }
         }
     }
 </script>
